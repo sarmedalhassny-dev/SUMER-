@@ -1,2 +1,2 @@
-# SUMER-
+# SUMER
 smart scooter
