@@ -1,0 +1,1910 @@
+﻿
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title data-i18n="metaTitle">SUMER | تنقّل حضري بسكوترات كهربائية ذكية</title>
+    <meta name="description" data-i18n-attr="content:metaDescription" content="SUMER منصة تأجير سكوترات كهربائية سريعة وآمنة. افتح التطبيق، امسح الكود، وانطلق في دقائق." />
+    <meta name="theme-color" content="#b7ff4b" />
+    <meta property="og:title" data-i18n-attr="content:metaTitle" content="SUMER | تنقّل حضري بسكوترات كهربائية ذكية" />
+    <meta property="og:description" data-i18n-attr="content:metaDescription" content="SUMER منصة تأجير سكوترات كهربائية سريعة وآمنة. افتح التطبيق، امسح الكود، وانطلق في دقائق." />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" data-i18n-attr="content:metaLocale" content="ar_AR" />
+    <meta property="og:site_name" content="SUMER" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="apple-touch-icon" href="favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --bg: #f4f1ea;
+        --ink: #11110f;
+        --muted: #6b6a66;
+        --lime: #b7ff4b;
+        --leaf: #1a5b2e;
+        --sky: #d8f2ff;
+        --sand: #f7e5c9;
+        --card: #ffffff;
+        --shadow: 0 30px 80px rgba(17, 17, 15, 0.14);
+        --shadow-soft: 0 16px 40px rgba(17, 17, 15, 0.12);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        font-family: "IBM Plex Sans Arabic", "Space Grotesk", sans-serif;
+        color: var(--ink);
+        background: radial-gradient(circle at 10% 20%, #fef7e8 0%, transparent 40%),
+          radial-gradient(circle at 90% 10%, #e1ffe2 0%, transparent 38%), var(--bg);
+        text-align: start;
+        position: relative;
+        overflow-x: hidden;
+      }
+
+      body::before,
+      body::after {
+        content: "";
+        position: fixed;
+        width: 420px;
+        height: 420px;
+        border-radius: 50%;
+        filter: blur(0);
+        opacity: 0.55;
+        pointer-events: none;
+        z-index: -1;
+        animation: float-shape 18s ease-in-out infinite;
+      }
+
+      body::before {
+        top: -140px;
+        left: -140px;
+        background: radial-gradient(circle, rgba(183, 255, 75, 0.45), rgba(183, 255, 75, 0) 70%);
+      }
+
+      body::after {
+        bottom: -180px;
+        right: -180px;
+        width: 520px;
+        height: 520px;
+        background: radial-gradient(circle, rgba(156, 231, 255, 0.45), rgba(156, 231, 255, 0) 70%);
+        animation-delay: -6s;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+
+      .page {
+        overflow: hidden;
+      }
+
+      .skip-link {
+        position: absolute;
+        top: -40px;
+        right: 24px;
+        background: var(--ink);
+        color: #fff;
+        padding: 8px 16px;
+        border-radius: 999px;
+        z-index: 100;
+        transition: top 0.2s ease;
+      }
+
+      .skip-link:focus {
+        top: 18px;
+      }
+
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background: rgba(244, 241, 234, 0.85);
+        backdrop-filter: blur(14px);
+        border-bottom: 1px solid rgba(17, 17, 15, 0.08);
+      }
+
+      .nav {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 18px 32px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        font-family: "Space Grotesk", "IBM Plex Sans Arabic", sans-serif;
+      }
+
+      .brand-mark {
+        width: 42px;
+        height: 42px;
+        border-radius: 16px;
+        background: #ffffff;
+        border: 1px solid rgba(17, 17, 15, 0.1);
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+      }
+
+      .brand-mark img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 20px;
+        color: var(--muted);
+        font-size: 0.95rem;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .nav-links a {
+        position: relative;
+        padding-bottom: 4px;
+      }
+
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        height: 2px;
+        background: var(--ink);
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: transform 0.2s ease;
+        opacity: 0.35;
+      }
+
+      html[dir="ltr"] .nav-links a::after {
+        transform-origin: left;
+      }
+
+      .nav-links a:hover::after {
+        transform: scaleX(1);
+        transform-origin: left;
+      }
+
+      html[dir="ltr"] .nav-links a:hover::after {
+        transform-origin: right;
+      }
+
+      .nav-cta {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .lang-switch {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .lang-toggle {
+        width: 42px;
+        height: 42px;
+        border-radius: 999px;
+        border: 1px solid rgba(17, 17, 15, 0.15);
+        background: #fff;
+        display: grid;
+        place-items: center;
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .lang-toggle:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 10px 24px rgba(17, 17, 15, 0.12);
+      }
+
+      .lang-toggle:focus-visible {
+        outline: 3px solid rgba(17, 17, 15, 0.4);
+        outline-offset: 3px;
+      }
+
+      .lang-icon {
+        width: 20px;
+        height: 20px;
+        display: block;
+      }
+
+      .lang-menu {
+        position: absolute;
+        top: calc(100% + 10px);
+        left: 50%;
+        transform: translate(-50%, -6px);
+        min-width: 170px;
+        background: #fff;
+        border: 1px solid rgba(17, 17, 15, 0.12);
+        border-radius: 16px;
+        padding: 6px;
+        display: grid;
+        gap: 4px;
+        box-shadow: var(--shadow-soft);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition: opacity 0.2s ease, transform 0.2s ease;
+        z-index: 20;
+      }
+
+      .lang-switch.open .lang-menu {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translate(-50%, 0);
+      }
+
+      .lang-btn {
+        border: none;
+        background: transparent;
+        padding: 8px 12px;
+        border-radius: 12px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        cursor: pointer;
+        font-family: "Space Grotesk", "IBM Plex Sans Arabic", sans-serif;
+        transition: background 0.2s ease, color 0.2s ease;
+        text-align: start;
+      }
+
+      .lang-btn.active {
+        background: var(--ink);
+        color: #fff;
+      }
+
+      .btn {
+        border: none;
+        border-radius: 999px;
+        padding: 12px 22px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        white-space: nowrap;
+        font-weight: 600;
+        font-family: "Space Grotesk", "IBM Plex Sans Arabic", sans-serif;
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease;
+      }
+
+      .btn.primary {
+        background: var(--ink);
+        color: #fff;
+        box-shadow: 0 18px 40px rgba(17, 17, 15, 0.2);
+      }
+
+      .btn.primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 22px 44px rgba(17, 17, 15, 0.26);
+      }
+
+      .btn.ghost {
+        background: transparent;
+        border: 1px solid rgba(17, 17, 15, 0.2);
+      }
+
+      .btn.ghost:hover {
+        background: rgba(17, 17, 15, 0.06);
+      }
+
+      .btn:focus-visible {
+        outline: 3px solid rgba(17, 17, 15, 0.4);
+        outline-offset: 3px;
+      }
+
+      .hero {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 90px 32px 40px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 50px;
+        align-items: center;
+      }
+
+      .eyebrow {
+        font-size: 0.9rem;
+        letter-spacing: 1px;
+        color: var(--leaf);
+        font-weight: 600;
+        margin: 0 0 12px;
+      }
+
+      .hero h1 {
+        font-family: "Space Grotesk", "IBM Plex Sans Arabic", sans-serif;
+        font-size: clamp(2.6rem, 4vw, 4rem);
+        line-height: 1.1;
+        margin: 0 0 20px;
+      }
+
+      .hero p {
+        color: var(--muted);
+        font-size: 1.1rem;
+        line-height: 1.7;
+        margin: 0 0 28px;
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        align-items: center;
+      }
+
+      .app-badges {
+        gap: 16px;
+      }
+
+      .store-badge {
+        min-width: 200px;
+        height: 56px;
+        padding: 10px 16px;
+        border-radius: 14px;
+        background: #0c0c0c;
+        color: #fff;
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.2);
+        font-family: "Space Grotesk", "IBM Plex Sans Arabic", sans-serif;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        direction: ltr;
+        text-align: left;
+      }
+
+      .store-badge:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 22px 44px rgba(0, 0, 0, 0.25);
+      }
+
+      .store-badge:focus-visible {
+        outline: 3px solid rgba(255, 255, 255, 0.5);
+        outline-offset: 3px;
+      }
+
+      .store-badge .badge-icon {
+        width: 28px;
+        height: 28px;
+        display: grid;
+        place-items: center;
+        flex-shrink: 0;
+      }
+
+      .store-badge svg {
+        width: 24px;
+        height: 24px;
+        display: block;
+      }
+
+      .store-badge .badge-text {
+        display: grid;
+        gap: 2px;
+        line-height: 1;
+      }
+
+      .store-badge .badge-eyebrow {
+        font-size: 0.62rem;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+        opacity: 0.8;
+      }
+
+      .store-badge .badge-title {
+        font-size: 1.02rem;
+        font-weight: 700;
+        letter-spacing: 0.01em;
+      }
+
+      .hero-tags {
+        display: flex;
+        gap: 12px;
+        margin-top: 26px;
+        flex-wrap: wrap;
+      }
+
+      .tag {
+        background: var(--card);
+        padding: 8px 14px;
+        border-radius: 999px;
+        border: 1px solid rgba(17, 17, 15, 0.08);
+        font-size: 0.9rem;
+      }
+
+      .hero-card {
+        position: relative;
+        padding: 36px;
+        border-radius: 36px;
+        background: var(--card);
+        box-shadow: var(--shadow);
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .hero-card::before {
+        content: "";
+        position: absolute;
+        inset: auto -40% 40% -40%;
+        height: 70%;
+        background: radial-gradient(circle, rgba(183, 255, 75, 0.7) 0%, transparent 70%);
+      }
+      .scooter-card {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .scooter-card h3 {
+        margin: 0 0 8px;
+        font-size: 1.6rem;
+        font-family: "Space Grotesk", "IBM Plex Sans Arabic", sans-serif;
+      }
+
+      .scooter-card p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      .scooter-illustration {
+        width: 100%;
+        max-width: 320px;
+        margin: 0 auto;
+        position: relative;
+        display: grid;
+        place-items: center;
+      }
+
+      .scooter-illustration::before {
+        content: "";
+        position: absolute;
+        inset: -12%;
+        background-image: url("favicon.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 70%;
+        opacity: 0.12;
+        filter: grayscale(100%) blur(0.4px);
+        transform-origin: center;
+        animation: logo-spin 18s linear infinite;
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      .scooter-image {
+        width: 100%;
+        height: auto;
+        display: block;
+        animation: scooter-float 3s ease-in-out infinite;
+        filter: drop-shadow(0 18px 30px rgba(17, 17, 15, 0.2));
+        position: relative;
+        z-index: 1;
+      }
+
+      .scooter-svg {
+        width: 100%;
+        height: auto;
+      }
+
+      .scooter-svg .scooter-body {
+        animation: scooter-float 3s ease-in-out infinite;
+        transform-origin: center;
+        transform-box: fill-box;
+      }
+
+      .scooter-svg .wheel-spin {
+        animation: wheel-spin 1.1s linear infinite;
+        transform-origin: center;
+        transform-box: fill-box;
+      }
+
+      .scooter-svg .road {
+        stroke: rgba(17, 17, 15, 0.25);
+        stroke-width: 4;
+        stroke-linecap: round;
+        stroke-dasharray: 14 16;
+        animation: road-move 1s linear infinite;
+      }
+
+      .scooter-svg .shadow {
+        fill: rgba(17, 17, 15, 0.12);
+        animation: shadow-pulse 3s ease-in-out infinite;
+        transform-origin: center;
+        transform-box: fill-box;
+      }
+
+      .scooter-svg .deck {
+        fill: url(#scooter-body);
+        stroke: #11110f;
+        stroke-width: 6;
+      }
+
+      .scooter-svg .frame {
+        stroke: #11110f;
+        stroke-width: 8;
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .scooter-svg .headlight {
+        fill: #fff7d1;
+        stroke: #11110f;
+        stroke-width: 5;
+      }
+
+      .scooter-svg .wheel-outer {
+        fill: #11110f;
+        stroke: #1a5b2e;
+        stroke-width: 6;
+      }
+
+      .scooter-svg .wheel-inner {
+        fill: #f4f1ea;
+        stroke: #1a5b2e;
+        stroke-width: 4;
+      }
+
+      .scooter-svg .spoke {
+        stroke: #1a5b2e;
+        stroke-width: 4;
+        stroke-linecap: round;
+      }
+
+      .scooter-svg .battery {
+        fill: #ffffff;
+        stroke: #11110f;
+        stroke-width: 5;
+      }
+
+      .scooter-chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .chip {
+        background: rgba(17, 17, 15, 0.06);
+        padding: 6px 12px;
+        border-radius: 999px;
+        font-size: 0.85rem;
+      }
+
+      .stats {
+        max-width: 1200px;
+        margin: 40px auto 0;
+        padding: 0 32px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+      }
+
+      .stat-card {
+        background: var(--card);
+        border-radius: 24px;
+        padding: 24px;
+        box-shadow: var(--shadow-soft);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .stat-card h4 {
+        margin: 0;
+        font-size: 1.8rem;
+        font-family: "Space Grotesk", "IBM Plex Sans Arabic", sans-serif;
+      }
+
+      .stat-card span {
+        color: var(--muted);
+      }
+      .section {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 100px 32px;
+      }
+
+      .section[id] {
+        scroll-margin-top: 120px;
+      }
+
+      .section-title {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 20px;
+        flex-wrap: wrap;
+        margin-bottom: 40px;
+      }
+
+      .section-title h2 {
+        margin: 0;
+        font-size: clamp(2rem, 3vw, 2.6rem);
+        font-family: "Space Grotesk", "IBM Plex Sans Arabic", sans-serif;
+      }
+
+      .section-title p {
+        margin: 0;
+        color: var(--muted);
+        max-width: 520px;
+        line-height: 1.7;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 22px;
+      }
+
+      .feature {
+        background: var(--card);
+        padding: 26px;
+        border-radius: 28px;
+        box-shadow: var(--shadow-soft);
+        position: relative;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .feature span {
+        font-size: 0.9rem;
+        color: var(--muted);
+        display: inline-block;
+      }
+
+      .feature h3 {
+        margin: 12px 0 10px;
+      }
+
+      .banner {
+        background: linear-gradient(120deg, var(--lime), #9ef0ff);
+        border-radius: 36px;
+        padding: 40px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 30px;
+        align-items: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .banner h3 {
+        margin: 0 0 12px;
+        font-size: 2rem;
+        font-family: "Space Grotesk", "IBM Plex Sans Arabic", sans-serif;
+      }
+
+      .banner p {
+        margin: 0;
+        color: #114220;
+        line-height: 1.7;
+      }
+
+      .map {
+        border-radius: 32px;
+        background: repeating-linear-gradient(90deg, rgba(17, 17, 15, 0.05) 0px, rgba(17, 17, 15, 0.05) 1px, transparent 1px, transparent 32px),
+          repeating-linear-gradient(0deg, rgba(17, 17, 15, 0.05) 0px, rgba(17, 17, 15, 0.05) 1px, transparent 1px, transparent 32px),
+          linear-gradient(135deg, #ffffff, #f0fff5);
+        padding: 40px;
+        display: grid;
+        gap: 18px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .map strong {
+        font-size: 1.1rem;
+      }
+
+      .map .dot {
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: var(--ink);
+        position: relative;
+      }
+
+      .map .dot::after {
+        content: "";
+        position: absolute;
+        inset: -12px;
+        border-radius: 50%;
+        border: 1px solid rgba(17, 17, 15, 0.3);
+      }
+
+      .pricing {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 24px;
+      }
+
+      .price-card {
+        padding: 28px;
+        border-radius: 28px;
+        background: var(--card);
+        box-shadow: var(--shadow-soft);
+        position: relative;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .price-card.featured {
+        border: 2px solid var(--lime);
+      }
+
+      .badge {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        background: var(--ink);
+        color: #fff;
+        font-size: 0.75rem;
+        padding: 6px 10px;
+        border-radius: 999px;
+      }
+
+      .price-card h4 {
+        margin: 0 0 10px;
+      }
+
+      .price {
+        font-size: 2rem;
+        font-weight: 700;
+        font-family: "Space Grotesk", "IBM Plex Sans Arabic", sans-serif;
+      }
+
+      .price-note {
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      .faq {
+        display: grid;
+        gap: 14px;
+      }
+
+      details {
+        background: var(--card);
+        border-radius: 20px;
+        padding: 18px 20px;
+        box-shadow: var(--shadow-soft);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      summary {
+        cursor: pointer;
+        font-weight: 600;
+        list-style: none;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      summary::-webkit-details-marker {
+        display: none;
+      }
+
+      summary::after {
+        content: "+";
+        font-size: 1.2rem;
+        font-weight: 700;
+      }
+
+      details[open] summary::after {
+        content: "-";
+      }
+
+      .hero-card:hover,
+      .stat-card:hover,
+      .feature:hover,
+      .price-card:hover,
+      .map:hover,
+      .banner:hover,
+      details:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 24px 60px rgba(17, 17, 15, 0.18);
+      }
+
+      footer {
+        padding: 60px 32px;
+        background: #12110f;
+        color: #f5f2ea;
+      }
+
+      footer a {
+        color: inherit;
+      }
+
+      .footer-grid {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 24px;
+      }
+
+      .footer-grid h5 {
+        margin: 0 0 12px;
+        font-family: "Space Grotesk", "IBM Plex Sans Arabic", sans-serif;
+      }
+
+      .ltr-text {
+        direction: ltr;
+        unicode-bidi: isolate;
+        text-align: left;
+        display: inline-block;
+      }
+
+      .social-links {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .social-link {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        color: #f5f2ea;
+        background: rgba(245, 242, 234, 0.12);
+        border: 1px solid rgba(245, 242, 234, 0.2);
+        transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .social-link:hover {
+        transform: translateY(-2px);
+        background: rgba(245, 242, 234, 0.22);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+      }
+
+      .social-link:focus-visible {
+        outline: 3px solid rgba(245, 242, 234, 0.6);
+        outline-offset: 3px;
+      }
+
+      .social-link svg {
+        width: 18px;
+        height: 18px;
+        display: block;
+      }
+
+      .footer-note {
+        text-align: center;
+        margin-top: 28px;
+        color: rgba(245, 242, 234, 0.7);
+        font-size: 0.85rem;
+      }
+      .reveal {
+        opacity: 0;
+        transform: translateY(20px);
+        animation: reveal 0.8s ease forwards;
+      }
+
+      .reveal.delay-1 { animation-delay: 0.15s; }
+      .reveal.delay-2 { animation-delay: 0.3s; }
+      .reveal.delay-3 { animation-delay: 0.45s; }
+
+      @keyframes reveal {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes scooter-float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-6px);
+        }
+      }
+
+      @keyframes wheel-spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      @keyframes logo-spin {
+        0% {
+          transform: rotate(-8deg);
+        }
+        100% {
+          transform: rotate(352deg);
+        }
+      }
+
+      @keyframes road-move {
+        to {
+          stroke-dashoffset: -30;
+        }
+      }
+
+      @keyframes shadow-pulse {
+        0%,
+        100% {
+          transform: scaleX(1);
+        }
+        50% {
+          transform: scaleX(0.9);
+        }
+      }
+
+      @keyframes float-shape {
+        0%,
+        100% {
+          transform: translate(0, 0);
+        }
+        50% {
+          transform: translate(20px, -30px);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+
+        .reveal {
+          animation: none;
+          opacity: 1;
+          transform: none;
+        }
+
+        .scooter-image,
+        .scooter-illustration::before,
+        .scooter-svg .scooter-body,
+        .scooter-svg .wheel-spin,
+        .scooter-svg .road,
+        .scooter-svg .shadow {
+          animation: none;
+        }
+
+        body::before,
+        body::after {
+          animation: none;
+        }
+      }
+
+      @media (max-width: 1024px) {
+        .nav {
+          padding: 18px 24px;
+        }
+
+        .hero {
+          padding: 80px 24px 32px;
+          gap: 32px;
+        }
+
+        .hero-card {
+          padding: 28px;
+          border-radius: 28px;
+        }
+
+        .section {
+          padding: 80px 24px;
+        }
+
+        .banner,
+        .map {
+          padding: 28px;
+        }
+
+        footer {
+          padding: 32px 24px;
+        }
+      }
+
+      @media (max-width: 980px) {
+        .nav {
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+
+        .nav-links,
+        .nav-cta {
+          width: 100%;
+          justify-content: center;
+        }
+
+        .nav-cta {
+          margin-top: 8px;
+        }
+      }
+
+      @media (max-width: 780px) {
+        .hero {
+          padding-top: 60px;
+        }
+
+        .banner {
+          padding: 28px;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .nav {
+          padding: 16px 20px;
+        }
+
+        .nav-links {
+          gap: 12px;
+          font-size: 0.88rem;
+        }
+
+        .nav-cta {
+          flex-direction: column;
+          width: 100%;
+        }
+
+        .nav-cta .btn {
+          width: 100%;
+          justify-content: center;
+        }
+
+        .lang-switch {
+          width: 100%;
+          justify-content: center;
+        }
+
+        .hero {
+          padding: 60px 20px 20px;
+        }
+
+        .hero-actions {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .hero-actions .btn {
+          width: 100%;
+        }
+
+        .app-badges {
+          justify-content: center;
+        }
+
+        .store-badge {
+          width: 100%;
+          justify-content: center;
+        }
+
+        .hero h1 {
+          font-size: clamp(2.1rem, 8vw, 2.8rem);
+        }
+
+        .stats {
+          padding: 0 20px;
+        }
+
+        .section {
+          padding: 70px 20px;
+        }
+
+        .banner,
+        .map {
+          padding: 24px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skipLink">تخطي إلى المحتوى</a>
+    <div class="page">
+      <header>
+        <nav class="nav" aria-label="التنقل الرئيسي" data-i18n-attr="aria-label:navLabel">
+          <a class="brand" href="index.html">
+            <div class="brand-mark">
+              <img src="favicon.png" alt="شعار SUMER" data-i18n-attr="alt:logoAlt" />
+            </div>
+            <span>SUMER</span>
+          </a>
+          <div class="nav-links">
+            <a href="about.html" data-i18n="navAbout">من نحن</a>
+            <a href="#how" data-i18n="navHow">كيف تعمل</a>
+            <a href="#fleet" data-i18n="navFleet">الأسطول</a>
+            <a href="cities.html" data-i18n="navCities">المدن</a>
+            <a href="subscribe.html" data-i18n="navSubscribe">الاشتراك</a>
+            <a href="#pricing" data-i18n="navPricing">الأسعار</a>
+            <a href="#faq" data-i18n="navFaq">الأسئلة</a>
+          </div>
+          <div class="nav-cta">
+            <div class="lang-switch">
+  <button class="lang-toggle" type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="تغيير اللغة" data-i18n-attr="aria-label:langLabel">
+    <svg class="lang-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6" />
+      <path d="M3 12h18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+      <path d="M12 3c3.2 3.6 3.2 14.4 0 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+      <path d="M12 3c-3.2 3.6-3.2 14.4 0 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+    </svg>
+  </button>
+  <div class="lang-menu" role="listbox" aria-label="تغيير اللغة" data-i18n-attr="aria-label:langLabel">
+    <button class="lang-btn active" type="button" data-lang="ar" role="option" aria-selected="true">العربية</button>
+    <button class="lang-btn" type="button" data-lang="en" role="option" aria-selected="false">English</button>
+    <button class="lang-btn" type="button" data-lang="ku" role="option" aria-selected="false">کوردی</button>
+  </div>
+</div>
+            <a class="btn ghost" href="#business" data-i18n="ctaBusiness">للشركات</a>
+            <a class="btn primary" href="#download" data-i18n="ctaDownload">حمّل التطبيق</a>
+          </div>
+        </nav>
+      </header>
+
+      <main id="main">
+        <section class="hero">
+          <div class="reveal">
+            <p class="eyebrow" data-i18n="heroEyebrow">تنقل حضري مستدام</p>
+            <h1 data-i18n="heroTitle">SUMER... تنقّل حضري سريع، نظيف، وبدون تعقيد.</h1>
+            <p data-i18n="heroDesc">
+              افتح التطبيق، امسح الكود، وانطلق. سكوترات SUMER تمنحك حركة ذكية خلال دقائق
+              مع تتبّع مباشر ومسارات آمنة.
+            </p>
+            <div class="hero-actions">
+              <a class="btn primary" href="#download" data-i18n="heroStart">ابدأ الآن</a>
+              <a class="btn ghost" href="#how" data-i18n="heroWatch">شاهد كيف تعمل</a>
+            </div>
+            <div class="hero-tags">
+              <span class="tag" data-i18n="heroTagSpeed">سرعة حتى 25 كم/س</span>
+              <span class="tag" data-i18n="heroTagCoverage">تغطية 32 مدينة</span>
+              <span class="tag" data-i18n="heroTagLock">قفل ذكي + GPS</span>
+            </div>
+          </div>
+          <div class="hero-card reveal delay-2">
+            <div class="scooter-card">
+              <div>
+                <h3 data-i18n="scooterTitle">سكوتر SUMER الذكي</h3>
+                <p data-i18n="scooterDesc">تعليق مرن، فرامل مزدوجة، وإضاءة تتأقلم تلقائيًا لكل شوارع المدينة.</p>
+              </div>
+              <div class="scooter-illustration">
+                <img
+                  class="scooter-image"
+                  src="electric_scooter_PNG63.png"
+                  width="200"
+                  height="200"
+                  alt="رسمة سكوتر كهربائي متحركة"
+                  data-i18n-attr="alt:scooterAlt"
+                />
+              </div>
+              <div class="scooter-chips">
+                <span class="chip" data-i18n="scooterChip1">مدى 40 كم</span>
+                <span class="chip" data-i18n="scooterChip2">فرامل مزدوجة</span>
+                <span class="chip" data-i18n="scooterChip3">إضاءة تلقائية</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="stats">
+          <div class="stat-card reveal delay-1">
+            <h4>+1.2M</h4>
+            <span data-i18n="statTrips">رحلة شهريًا</span>
+          </div>
+          <div class="stat-card reveal delay-2">
+            <h4>95%</h4>
+            <span data-i18n="statSatisfaction">معدل رضا المستخدمين</span>
+          </div>
+          <div class="stat-card reveal delay-3">
+            <h4 data-i18n="statTimeValue">3 دقائق</h4>
+            <span data-i18n="statResponse">متوسط وقت الوصول لسكوتر</span>
+          </div>
+        </section>
+        <section class="section" id="how">
+          <div class="section-title">
+            <h2 data-i18n="howTitle">رحلة سلسة من 4 خطوات</h2>
+            <p data-i18n="howDesc">نظام التشغيل مصمم ليكون سهلًا من أول مرة: افتح القفل، قُد بأمان، ثم اترك السكوتر في نقطة آمنة.</p>
+          </div>
+          <div class="grid">
+            <div class="feature reveal">
+              <span>01</span>
+              <h3 data-i18n="howStep1Title">افتح التطبيق</h3>
+              <p data-i18n="howStep1Desc">ابحث عن أقرب سكوتر على الخريطة مع مؤشر البطارية.</p>
+            </div>
+            <div class="feature reveal delay-1">
+              <span>02</span>
+              <h3 data-i18n="howStep2Title">امسح الكود</h3>
+              <p data-i18n="howStep2Desc">رمز QR يفتح القفل في أقل من ثانية، بدون انتظار.</p>
+            </div>
+            <div class="feature reveal delay-2">
+              <span>03</span>
+              <h3 data-i18n="howStep3Title">قد بأمان</h3>
+              <p data-i18n="howStep3Desc">تنبيهات السلامة والمسارات الموصى بها تحميك.</p>
+            </div>
+            <div class="feature reveal delay-3">
+              <span>04</span>
+              <h3 data-i18n="howStep4Title">أوقف في منطقة آمنة</h3>
+              <p data-i18n="howStep4Desc">النظام يرشح لك نقاط ركن معتمدة لتجنب المخالفات.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="fleet">
+          <div class="section-title">
+            <h2 data-i18n="fleetTitle">أسطول SUMER المتطور</h2>
+            <p data-i18n="fleetDesc">سكوترات مصممة لطرق المدينة: إطارات عريضة، فرامل مزدوجة، إنارة ذكية، وسطح مضاد للانزلاق.</p>
+          </div>
+          <div class="banner">
+            <div>
+              <h3 data-i18n="fleetCard1Title">نظام أمان متكامل</h3>
+              <p data-i18n="fleetCard1Desc">مستشعرات السرعة، إنذار فوري عند الاصطدام، وتتبع مباشر يضمن تجربة آمنة.</p>
+            </div>
+            <div>
+              <h3 data-i18n="fleetCard2Title">بطاريات تدوم أطول</h3>
+              <p data-i18n="fleetCard2Desc">ما يصل إلى 40 كم في الشحنة الواحدة مع تبديل سريع بواسطة فريقنا.</p>
+            </div>
+            <div>
+              <h3 data-i18n="fleetCard3Title">صيانة على مدار الساعة</h3>
+              <p data-i18n="fleetCard3Desc">فريق ميداني يراقب الأداء ويعيد الانتشار حسب الطلب.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="cities">
+          <div class="section-title">
+            <h2 data-i18n="citiesTitle">تغطية حضرية متنامية</h2>
+            <p data-i18n="citiesDesc">SUMER متواجد الآن في أبرز مناطق الأعمال والجامعات والأحياء الحيوية.</p>
+          </div>
+          <div class="map">
+            <div class="dot"></div>
+            <strong data-i18n="citiesList">بغداد • المنصور • مجمع النخيل • حديقة الزوراء • مجمع بدور السكني • مجمع بوابة العراق • مجمع أبراج النخيل • جامعة بغداد</strong>
+            <span data-i18n="citiesNote">مناطق توسع جديدة كل أسبوعين</span>
+          </div>
+        </section>
+        <section class="section" id="pricing">
+          <div class="section-title">
+            <h2 data-i18n="pricingTitle">خطط أسعار واضحة</h2>
+            <p data-i18n="pricingDesc">ادفع حسب الاستخدام أو اختر باقات شهرية تناسب تنقلك اليومي.</p>
+          </div>
+          <div class="pricing">
+            <div class="price-card reveal">
+              <h4 data-i18n="priceMinuteTitle">بالدقيقة</h4>
+              <div class="price">0.5$</div>
+              <p data-i18n="priceMinuteDesc">افتح السكوتر بـ 1.0$ ثم ادفع لكل دقيقة.</p>
+              <p class="price-note" data-i18n="priceMinuteNote">يشمل التأمين الأساسي داخل المدينة.</p>
+              <a class="btn ghost" href="#download" data-i18n="priceMinuteCta">ابدأ تجربة</a>
+            </div>
+            <div class="price-card featured reveal delay-1">
+              <span class="badge" data-i18n="priceBadge">الأكثر طلبًا</span>
+              <h4 data-i18n="priceUnlimitedTitle">بلا حدود</h4>
+              <div class="price">30$</div>
+              <p data-i18n="priceUnlimitedDesc">تنقل غير محدود داخل المدينة لمدة شهر كامل.</p>
+              <p class="price-note" data-i18n="priceUnlimitedNote">تفعيل فوري مع دعم أولي.</p>
+              <a class="btn primary" href="#download" data-i18n="priceUnlimitedCta">اشترك الآن</a>
+            </div>
+            <div class="price-card reveal delay-2">
+              <h4 data-i18n="priceBusinessTitle">للشركات</h4>
+              <div class="price" data-i18n="priceBusinessPrice">حسب الطلب</div>
+              <p data-i18n="priceBusinessDesc">حلول تنقل للشركات والمجمعات السكنية.</p>
+              <p class="price-note" data-i18n="priceBusinessNote">تقارير شهرية ولوحة تحكم.</p>
+              <a class="btn ghost" href="#business" data-i18n="priceBusinessCta">تواصل معنا</a>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="business">
+          <div class="section-title">
+            <h2 data-i18n="businessTitle">حلول SUMER للأعمال</h2>
+            <p data-i18n="businessDesc">باقات مخصصة للشركات والجامعات والمجمعات السكنية مع تحكم كامل وتقارير فورية.</p>
+          </div>
+          <div class="grid">
+            <div class="feature reveal">
+              <span data-i18n="businessLabel1">لوحة تحكم</span>
+              <h3 data-i18n="businessTitle1">إدارة مباشرة للأسطول</h3>
+              <p data-i18n="businessDesc1">راقب التوافر، معدلات الاستخدام، ومؤشرات السلامة لحظيًا.</p>
+            </div>
+            <div class="feature reveal delay-1">
+              <span data-i18n="businessLabel2">باقات مرنة</span>
+              <h3 data-i18n="businessTitle2">تسعير مناسب للفرق</h3>
+              <p data-i18n="businessDesc2">خصومات على الاشتراكات، وفاتورة شهرية موحدة للأقسام.</p>
+            </div>
+            <div class="feature reveal delay-2">
+              <span data-i18n="businessLabel3">إطلاق سريع</span>
+              <h3 data-i18n="businessTitle3">تشغيل خلال أسبوعين</h3>
+              <p data-i18n="businessDesc3">تقييم الموقع، وضع نقاط ركن، وتدريب فريق التشغيل.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="faq">
+          <div class="section-title">
+            <h2 data-i18n="faqTitle">أسئلة شائعة</h2>
+            <p data-i18n="faqDesc">نصائح وإجابات سريعة لتجربة انسيابية من أول رحلة.</p>
+          </div>
+          <div class="faq">
+            <details open>
+              <summary data-i18n="faqQ1">هل أحتاج إلى رخصة قيادة؟</summary>
+              <p data-i18n="faqA1">لا، فقط يجب أن تكون فوق 18 سنة وتلتزم بقواعد المرور المحلية.</p>
+            </details>
+            <details>
+              <summary data-i18n="faqQ2">أين يمكنني التوقف؟</summary>
+              <p data-i18n="faqA2">التطبيق يعرض مناطق آمنة ومعتمدة للركن لتجنب الغرامات.</p>
+            </details>
+            <details>
+              <summary data-i18n="faqQ3">هل تتوفر خوذات؟</summary>
+              <p data-i18n="faqA3">نعم في بعض المدن، ويمكنك الطلب مسبقًا عبر التطبيق.</p>
+            </details>
+          </div>
+        </section>
+
+        <section class="section" id="download">
+          <div class="banner">
+            <div>
+              <h3 data-i18n="downloadTitle">جاهز لرحلتك القادمة؟</h3>
+              <p data-i18n="downloadDesc">حمّل تطبيق SUMER واستمتع بتنقل أكثر ذكاءً واستدامة.</p>
+            </div>
+            <div class="hero-actions app-badges">
+              <a
+                class="store-badge apple"
+                href="#"
+                aria-label="App Store"
+                data-i18n-attr="aria-label:appStoreLabel"
+              >
+                <span class="badge-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path
+                      d="M16.67 13.88c.02 2.28 2.05 3.03 2.07 3.04-.02.05-.33 1.13-1.1 2.24-.67.97-1.36 1.94-2.46 1.96-1.07.02-1.42-.63-2.65-.63s-1.63.61-2.66.65c-1.06.04-1.86-1.05-2.54-2.02-1.39-1.99-2.45-5.62-1.02-8.07.71-1.2 1.98-1.96 3.36-1.98 1.05-.02 2.05.7 2.65.7.6 0 1.73-.86 2.92-.73.5.02 1.9.2 2.8 1.52-.07.04-1.67.98-1.65 2.94zm-2.17-8.18c.56-.68.94-1.62.84-2.56-.81.03-1.79.54-2.37 1.21-.52.6-.98 1.55-.86 2.47.9.07 1.83-.46 2.39-1.12z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </span>
+                <span class="badge-text">
+                  <span class="badge-eyebrow">Download on the</span>
+                  <span class="badge-title">App Store</span>
+                </span>
+              </a>
+              <a
+                class="store-badge play"
+                href="#"
+                aria-label="Google Play"
+                data-i18n-attr="aria-label:playStoreLabel"
+              >
+                <span class="badge-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <defs>
+                      <linearGradient id="playGradient" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="#34A853" />
+                        <stop offset="45%" stop-color="#FBBC05" />
+                        <stop offset="70%" stop-color="#EA4335" />
+                        <stop offset="100%" stop-color="#4285F4" />
+                      </linearGradient>
+                    </defs>
+                    <path d="M4 3.5L20 12L4 20.5Z" fill="url(#playGradient)" />
+                  </svg>
+                </span>
+                <span class="badge-text">
+                  <span class="badge-eyebrow">Get it on</span>
+                  <span class="badge-title">Google Play</span>
+                </span>
+              </a>
+            </div>
+          </div>
+        </section>
+      </main>
+      <footer>
+        <div class="footer-grid">
+          <div>
+            <h5>SUMER</h5>
+            <p data-i18n="footerAbout">منصة تنقل كهربائية حضرية تجمع بين السرعة والأمان.</p>
+          </div>
+          <div>
+            <h5 data-i18n="footerQuickLinks">روابط سريعة</h5>
+            <p>
+              <a href="#cities" data-i18n="footerLinkCities">المدن</a><br />
+              <a href="#pricing" data-i18n="footerLinkPricing">الأسعار</a><br />
+              <a href="#business" data-i18n="footerLinkPartners">الشراكات</a>
+            </p>
+          </div>
+          <div>
+            <h5 data-i18n="footerContact">التواصل</h5>
+            <p>
+              <a href="mailto:support@sumer.com">support@sumer.com</a><br />
+              <a href="tel:+9647817602170"><span class="ltr-text">+964 781 760 2170</span></a>
+            </p>
+          </div>
+          <div>
+            <h5 data-i18n="footerFollow">تابعنا</h5>
+            <div class="social-links" aria-label="روابط التواصل الاجتماعي" data-i18n-attr="aria-label:footerSocialLabel">
+              <a class="social-link" href="#" aria-label="إنستاغرام" data-i18n-attr="aria-label:footerSocialInstagram">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <rect x="4" y="4" width="16" height="16" rx="5" fill="none" stroke="currentColor" stroke-width="1.6" />
+                  <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.6" />
+                  <circle cx="17" cy="7" r="1" fill="currentColor" />
+                </svg>
+              </a>
+              <a class="social-link" href="#" aria-label="لينكدإن" data-i18n-attr="aria-label:footerSocialLinkedIn">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <rect x="4" y="4" width="16" height="16" rx="3" fill="none" stroke="currentColor" stroke-width="1.6" />
+                  <path d="M8 11v6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+                  <circle cx="8" cy="8" r="1" fill="currentColor" />
+                  <path d="M12 11v6m0-4.2c0-1.4 2.8-1.5 2.8 0V17" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+                </svg>
+              </a>
+              <a class="social-link" href="#" aria-label="إكس" data-i18n-attr="aria-label:footerSocialX">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path d="M6 5l12 14M18 5L6 19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="footer-note">
+          <small data-i18n="footerNote">© 2026 SUMER. جميع الحقوق محفوظة.</small>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      (function () {
+        const translations = {
+          ar: {
+            metaTitle: "SUMER | تنقّل حضري بسكوترات كهربائية ذكية",
+            metaDescription: "SUMER منصة تأجير سكوترات كهربائية سريعة وآمنة. افتح التطبيق، امسح الكود، وانطلق في دقائق.",
+            metaLocale: "ar_AR",
+            skipLink: "تخطي إلى المحتوى",
+            navLabel: "التنقل الرئيسي",
+            logoAlt: "شعار SUMER",
+            navAbout: "من نحن",
+            navHow: "كيف تعمل",
+            navFleet: "الأسطول",
+            navCities: "المدن",
+            navSubscribe: "الاشتراك",
+            navPricing: "الأسعار",
+            navFaq: "الأسئلة",
+            langLabel: "تغيير اللغة",
+            ctaBusiness: "للشركات",
+            ctaDownload: "حمّل التطبيق",
+            heroEyebrow: "تنقل حضري مستدام",
+            heroTitle: "SUMER... تنقّل حضري سريع، نظيف، وبدون تعقيد.",
+            heroDesc: "افتح التطبيق، امسح الكود، وانطلق. سكوترات SUMER تمنحك حركة ذكية خلال دقائق مع تتبّع مباشر ومسارات آمنة.",
+            heroStart: "ابدأ الآن",
+            heroWatch: "شاهد كيف تعمل",
+            heroTagSpeed: "سرعة حتى 25 كم/س",
+            heroTagCoverage: "تغطية 32 مدينة",
+            heroTagLock: "قفل ذكي + GPS",
+            scooterTitle: "سكوتر SUMER الذكي",
+            scooterDesc: "تعليق مرن، فرامل مزدوجة، وإضاءة تتأقلم تلقائيًا لكل شوارع المدينة.",
+            scooterChip1: "مدى 40 كم",
+            scooterChip2: "فرامل مزدوجة",
+            scooterChip3: "إضاءة تلقائية",
+            scooterAlt: "رسمة سكوتر كهربائي متحركة",
+            statTrips: "رحلة شهريًا",
+            statSatisfaction: "معدل رضا المستخدمين",
+            statResponse: "متوسط وقت الوصول لسكوتر",
+            statTimeValue: "3 دقائق",
+            howTitle: "رحلة سلسة من 4 خطوات",
+            howDesc: "نظام التشغيل مصمم ليكون سهلًا من أول مرة: افتح القفل، قُد بأمان، ثم اترك السكوتر في نقطة آمنة.",
+            howStep1Title: "افتح التطبيق",
+            howStep1Desc: "ابحث عن أقرب سكوتر على الخريطة مع مؤشر البطارية.",
+            howStep2Title: "امسح الكود",
+            howStep2Desc: "رمز QR يفتح القفل في أقل من ثانية، بدون انتظار.",
+            howStep3Title: "قد بأمان",
+            howStep3Desc: "تنبيهات السلامة والمسارات الموصى بها تحميك.",
+            howStep4Title: "أوقف في منطقة آمنة",
+            howStep4Desc: "النظام يرشح لك نقاط ركن معتمدة لتجنب المخالفات.",
+            fleetTitle: "أسطول SUMER المتطور",
+            fleetDesc: "سكوترات مصممة لطرق المدينة: إطارات عريضة، فرامل مزدوجة، إنارة ذكية، وسطح مضاد للانزلاق.",
+            fleetCard1Title: "نظام أمان متكامل",
+            fleetCard1Desc: "مستشعرات السرعة، إنذار فوري عند الاصطدام، وتتبع مباشر يضمن تجربة آمنة.",
+            fleetCard2Title: "بطاريات تدوم أطول",
+            fleetCard2Desc: "ما يصل إلى 40 كم في الشحنة الواحدة مع تبديل سريع بواسطة فريقنا.",
+            fleetCard3Title: "صيانة على مدار الساعة",
+            fleetCard3Desc: "فريق ميداني يراقب الأداء ويعيد الانتشار حسب الطلب.",
+            citiesTitle: "تغطية حضرية متنامية",
+            citiesDesc: "SUMER متواجد الآن في أبرز مناطق الأعمال والجامعات والأحياء الحيوية.",
+            citiesList: "بغداد • المنصور • مجمع النخيل • حديقة الزوراء • مجمع بدور السكني • مجمع بوابة العراق • مجمع أبراج النخيل • جامعة بغداد",
+            citiesNote: "مناطق توسع جديدة كل أسبوعين",
+            pricingTitle: "خطط أسعار واضحة",
+            pricingDesc: "ادفع حسب الاستخدام أو اختر باقات شهرية تناسب تنقلك اليومي.",
+            priceMinuteTitle: "بالدقيقة",
+            priceMinuteDesc: "افتح السكوتر بـ 1.0$ ثم ادفع لكل دقيقة.",
+            priceMinuteNote: "يشمل التأمين الأساسي داخل المدينة.",
+            priceMinuteCta: "ابدأ تجربة",
+            priceUnlimitedTitle: "بلا حدود",
+            priceUnlimitedDesc: "تنقل غير محدود داخل المدينة لمدة شهر كامل.",
+            priceUnlimitedNote: "تفعيل فوري مع دعم أولي.",
+            priceUnlimitedCta: "اشترك الآن",
+            priceBusinessTitle: "للشركات",
+            priceBusinessPrice: "حسب الطلب",
+            priceBusinessDesc: "حلول تنقل للشركات والمجمعات السكنية.",
+            priceBusinessNote: "تقارير شهرية ولوحة تحكم.",
+            priceBusinessCta: "تواصل معنا",
+            priceBadge: "الأكثر طلبًا",
+            businessTitle: "حلول SUMER للأعمال",
+            businessDesc: "باقات مخصصة للشركات والجامعات والمجمعات السكنية مع تحكم كامل وتقارير فورية.",
+            businessLabel1: "لوحة تحكم",
+            businessTitle1: "إدارة مباشرة للأسطول",
+            businessDesc1: "راقب التوافر، معدلات الاستخدام، ومؤشرات السلامة لحظيًا.",
+            businessLabel2: "باقات مرنة",
+            businessTitle2: "تسعير مناسب للفرق",
+            businessDesc2: "خصومات على الاشتراكات، وفاتورة شهرية موحدة للأقسام.",
+            businessLabel3: "إطلاق سريع",
+            businessTitle3: "تشغيل خلال أسبوعين",
+            businessDesc3: "تقييم الموقع، وضع نقاط ركن، وتدريب فريق التشغيل.",
+            faqTitle: "أسئلة شائعة",
+            faqDesc: "نصائح وإجابات سريعة لتجربة انسيابية من أول رحلة.",
+            faqQ1: "هل أحتاج إلى رخصة قيادة؟",
+            faqA1: "لا، فقط يجب أن تكون فوق 18 سنة وتلتزم بقواعد المرور المحلية.",
+            faqQ2: "أين يمكنني التوقف؟",
+            faqA2: "التطبيق يعرض مناطق آمنة ومعتمدة للركن لتجنب الغرامات.",
+            faqQ3: "هل تتوفر خوذات؟",
+            faqA3: "نعم في بعض المدن، ويمكنك الطلب مسبقًا عبر التطبيق.",
+            downloadTitle: "جاهز لرحلتك القادمة؟",
+            downloadDesc: "حمّل تطبيق SUMER واستمتع بتنقل أكثر ذكاءً واستدامة.",
+            appStoreLabel: "متجر التطبيقات",
+            playStoreLabel: "جوجل بلاي",
+            footerAbout: "منصة تنقل كهربائية حضرية تجمع بين السرعة والأمان.",
+            footerQuickLinks: "روابط سريعة",
+            footerLinkCities: "المدن",
+            footerLinkPricing: "الأسعار",
+            footerLinkPartners: "الشراكات",
+            footerContact: "التواصل",
+            footerFollow: "تابعنا",
+            footerSocialLabel: "روابط التواصل الاجتماعي",
+            footerSocialInstagram: "إنستاغرام",
+            footerSocialLinkedIn: "لينكدإن",
+            footerSocialX: "إكس",
+            footerNote: "© 2026 SUMER. جميع الحقوق محفوظة."
+          },
+          en: {
+            metaTitle: "SUMER | Smart electric scooter rides",
+            metaDescription: "SUMER is a fast, safe e-scooter rental platform. Open the app, scan the code, and ride in minutes.",
+            metaLocale: "en_US",
+            skipLink: "Skip to content",
+            navLabel: "Primary navigation",
+            logoAlt: "SUMER logo",
+            navAbout: "About us",
+            navHow: "How it works",
+            navFleet: "Fleet",
+            navCities: "Cities",
+            navSubscribe: "Subscribe",
+            navPricing: "Pricing",
+            navFaq: "FAQ",
+            langLabel: "Language switcher",
+            ctaBusiness: "For business",
+            ctaDownload: "Get the app",
+            heroEyebrow: "Sustainable urban mobility",
+            heroTitle: "SUMER... Fast, clean, and effortless city rides.",
+            heroDesc: "Open the app, scan the code, and go. SUMER scooters move you in minutes with live tracking and safe routes.",
+            heroStart: "Get started",
+            heroWatch: "See how it works",
+            heroTagSpeed: "Up to 25 km/h",
+            heroTagCoverage: "Coverage in 32 cities",
+            heroTagLock: "Smart lock + GPS",
+            scooterTitle: "SUMER smart scooter",
+            scooterDesc: "Smooth suspension, dual brakes, and adaptive lighting for every street.",
+            scooterChip1: "40 km range",
+            scooterChip2: "Dual brakes",
+            scooterChip3: "Auto lighting",
+            scooterAlt: "Animated electric scooter illustration",
+            statTrips: "rides per month",
+            statSatisfaction: "user satisfaction",
+            statResponse: "avg. scooter arrival",
+            statTimeValue: "3 min",
+            howTitle: "A smooth ride in 4 steps",
+            howDesc: "The flow is built to be simple from the first ride: unlock, ride safely, and park in a safe spot.",
+            howStep1Title: "Open the app",
+            howStep1Desc: "Find the closest scooter on the map with battery status.",
+            howStep2Title: "Scan the code",
+            howStep2Desc: "A QR code unlocks in seconds with no waiting.",
+            howStep3Title: "Ride safely",
+            howStep3Desc: "Safety alerts and recommended routes keep you protected.",
+            howStep4Title: "Park in a safe zone",
+            howStep4Desc: "The system suggests approved parking areas to avoid fines.",
+            fleetTitle: "The SUMER fleet",
+            fleetDesc: "Scooters built for city streets: wide tires, dual brakes, smart lighting, and a non-slip deck.",
+            fleetCard1Title: "Integrated safety system",
+            fleetCard1Desc: "Speed sensors, instant impact alerts, and live tracking for safer rides.",
+            fleetCard2Title: "Longer-lasting batteries",
+            fleetCard2Desc: "Up to 40 km per charge with quick swaps by our team.",
+            fleetCard3Title: "24/7 maintenance",
+            fleetCard3Desc: "A field team monitors performance and rebalances supply on demand.",
+            citiesTitle: "Growing city coverage",
+            citiesDesc: "SUMER is now present in key business districts, campuses, and busy neighborhoods.",
+            citiesList: "Baghdad • Al-Mansour • Al-Nakhil Complex • Al-Zawraa Park • Budoor Residential Complex • Iraq Gate Complex • Al-Nakhil Towers Complex • University of Baghdad",
+            citiesNote: "New expansion zones every two weeks",
+            pricingTitle: "Clear pricing plans",
+            pricingDesc: "Pay as you go or choose a monthly plan for daily rides.",
+            priceMinuteTitle: "Per minute",
+            priceMinuteDesc: "Unlock for $1.5 then pay per minute.",
+            priceMinuteNote: "Basic city insurance included.",
+            priceMinuteCta: "Start a trial",
+            priceUnlimitedTitle: "Unlimited",
+            priceUnlimitedDesc: "Unlimited rides within the city for a full month.",
+            priceUnlimitedNote: "Instant activation with priority support.",
+            priceUnlimitedCta: "Subscribe now",
+            priceBusinessTitle: "Business",
+            priceBusinessPrice: "On request",
+            priceBusinessDesc: "Mobility solutions for companies and residential communities.",
+            priceBusinessNote: "Monthly reports and admin dashboard.",
+            priceBusinessCta: "Contact sales",
+            priceBadge: "Most popular",
+            businessTitle: "SUMER for business",
+            businessDesc: "Custom packages for companies, universities, and compounds with full control and live insights.",
+            businessLabel1: "Dashboard",
+            businessTitle1: "Live fleet management",
+            businessDesc1: "Track availability, usage rates, and safety metrics in real time.",
+            businessLabel2: "Flexible plans",
+            businessTitle2: "Team-friendly pricing",
+            businessDesc2: "Discounted subscriptions with a single monthly invoice.",
+            businessLabel3: "Fast launch",
+            businessTitle3: "Go live in two weeks",
+            businessDesc3: "Site assessment, parking zones, and operations training included.",
+            faqTitle: "Frequently asked questions",
+            faqDesc: "Quick answers and tips for a smooth first ride.",
+            faqQ1: "Do I need a driver's license?",
+            faqA1: "No, just be 18+ and follow local traffic rules.",
+            faqQ2: "Where can I park?",
+            faqA2: "The app shows safe, approved parking areas to avoid fines.",
+            faqQ3: "Are helmets available?",
+            faqA3: "Yes in select cities, and you can request one in advance.",
+            downloadTitle: "Ready for your next ride?",
+            downloadDesc: "Download the SUMER app and enjoy smarter, cleaner mobility.",
+            appStoreLabel: "App Store",
+            playStoreLabel: "Google Play",
+            footerAbout: "An electric urban mobility platform that blends speed and safety.",
+            footerQuickLinks: "Quick links",
+            footerLinkCities: "Cities",
+            footerLinkPricing: "Pricing",
+            footerLinkPartners: "Partnerships",
+            footerContact: "Contact",
+            footerFollow: "Follow us",
+            footerSocialLabel: "Social links",
+            footerSocialInstagram: "Instagram",
+            footerSocialLinkedIn: "LinkedIn",
+            footerSocialX: "X",
+            footerNote: "© 2026 SUMER. All rights reserved."
+          },
+          ku: {
+            metaTitle: "SUMER | گواستنەوەی شارستانی بە سکووتەری کارەبایی زیرەک",
+            metaDescription: "SUMER پلاتفۆرمی کرێی سکووتەری کارەبایی خێرا و پارێزراوە. ئەپەکە بکەوە، کۆد بسکەن، و لە چەند خولەکدا دەست پێ بکە.",
+            metaLocale: "ku_IQ",
+            skipLink: "باز لە ناوەڕۆک",
+            navLabel: "ڕێنوێنی سەرەکی",
+            logoAlt: "لوگۆی SUMER",
+            navAbout: "ئێمە کێین",
+            navHow: "چۆن کاردەکات",
+            navFleet: "فڵیت",
+            navCities: "شارەکان",
+            navSubscribe: "بەشداربوون",
+            navPricing: "نرخەکان",
+            navFaq: "پرسیارەکان",
+            langLabel: "گۆڕینی زمان",
+            ctaBusiness: "بۆ کۆمپانیاکان",
+            ctaDownload: "داگرتنی ئەپ",
+            heroEyebrow: "گواستنەوەی شارستانی بەردەوام",
+            heroTitle: "SUMER... گواستنەوەی شارستانی خێرا، پاک، و بەبێ پیچیدەیی.",
+            heroDesc: "ئەپەکە بکەوە، کۆد بسکەن، و دەست پێ بکە. سکووتەرەکانی SUMER تۆ لە چەند خولەکدا دەگەیەنە شوێنەکان لەگەڵ شوێنکەوتنی راستەوخۆ و ڕێگاکانی پارێزراو.",
+            heroStart: "ئێستا دەست پێ بکە",
+            heroWatch: "ببینە چۆن کاردەکات",
+            heroTagSpeed: "خێرایی تا 25 کم/کاتژمێر",
+            heroTagCoverage: "پوشینی 32 شار",
+            heroTagLock: "قفلێکی زیرەک + GPS",
+            scooterTitle: "سکووتەری زیرەکی SUMER",
+            scooterDesc: "هەڵدانێکی نەرم، فڕەمە دووجاڕ، و ڕووناکی خۆکار بۆ هەموو شەقامێک.",
+            scooterChip1: "ماوەی 40 کم",
+            scooterChip2: "فڕەمە دووجاڕ",
+            scooterChip3: "ڕووناکی خۆکار",
+            scooterAlt: "وێنەی جوڵاوەی سکووتەری کارەبایی",
+            statTrips: "گەشتی مانگانە",
+            statSatisfaction: "ڕێژەی ڕازیبوون",
+            statResponse: "میانگینی گەیشتن",
+            statTimeValue: "3 خولەک",
+            howTitle: "گەشتێکی ئاسان لە 4 هەنگاو",
+            howDesc: "ڕێڕەوی کارکردن بە سادەیی داڕێژراوە: قفڵ بکەوە، بە پارێزراوی بڕۆ، پاشان لە شوێنی پارێزراو وەستە.",
+            howStep1Title: "ئەپەکە بکەوە",
+            howStep1Desc: "سکووتەری نزیکترین بدۆزەوە لەسەر نەخشەکە لەگەڵ نیشانەی باتری.",
+            howStep2Title: "کۆد بسکەن",
+            howStep2Desc: "کۆدی QR قفڵەکە لە چەند چرکەدا دەکاتەوە، بەبێ چاوەڕوانی.",
+            howStep3Title: "بە پارێزراوی بڕۆ",
+            howStep3Desc: "ئاگادارییەکانی پارێزگاری و ڕێگاکانی پێشنیارکراو پارێزت دەکەن.",
+            howStep4Title: "لە شوێنی پارێزراو وەستە",
+            howStep4Desc: "سیستەم شوێنە پەسەندکراوەکانی وستاندن پێشنیار دەکات بۆ دووربوون لە سزا.",
+            fleetTitle: "فڵیتی پێشکەوتووی SUMER",
+            fleetDesc: "سکووتەرەکان بۆ ڕێگای شار دروستکراون: تایەرە فراوان، فڕەمە دووجاڕ، ڕووناکی زیرەک، و سطحێکی نەرەوان.",
+            fleetCard1Title: "سیستەمی ئاسایشی تەواو",
+            fleetCard1Desc: "حسکەرەکانی خێرایی، ئاگاداری تەنیشتی لە کاتی ڕووداو، و شوێنکەوتنی ڕاستەوخۆ بۆ پارێزگاری.",
+            fleetCard2Title: "باترییەکان درێژتر دەمانن",
+            fleetCard2Desc: "تا 40 کم لە هەر چارجێکدا لەگەڵ گۆڕینی خێرا لەلایەن تیمەکەمان.",
+            fleetCard3Title: "چاکسازی 24/7",
+            fleetCard3Desc: "تیمی مەیدان کارەکان بەردەوام چاودێری ئەدا دەکەن و پەخشی سکووتەرەکان ڕێک دەخەن.",
+            citiesTitle: "پوشینی شارستانی بەردەوام",
+            citiesDesc: "SUMER ئێستا لە ناوچە گرنگەکانی بازاڕ، زانکۆکان، و ناوچە جێگیرەکاندا هەیە.",
+            citiesList: "بەغدا • مەنسور • کۆمەڵگەی نەخیل • پارکی زەوراء • کۆمەڵگەی نیشتەجێیی بدور • کۆمەڵگەی دەروازەی عێراق • کۆمەڵگەی ئەبراجی نەخیل • زانکۆی بەغدا",
+            citiesNote: "هەموو دوو هەفتە جارێک شوێنە نوێی گەشە",
+            pricingTitle: "پلانەکانی نرخ ڕوون",
+            pricingDesc: "بەپێی بەکارهێنان پارە بدە یان پەکێجی مانگانە هەڵبژێرە بۆ گەشتە ڕۆژانە.",
+            priceMinuteTitle: "بەپێی خولەک",
+            priceMinuteDesc: "سکووتەر بە 1.5$ بکەرەوە پاشان بۆ هەر خولەک پارە بدە.",
+            priceMinuteNote: "بیمەی بنەڕەتی ناو شار تێدایە.",
+            priceMinuteCta: "تاقیکردنەوە دەست پێ بکە",
+            priceUnlimitedTitle: "بێ سنوور",
+            priceUnlimitedDesc: "گواستنەوەی بێ سنوور لە ناو شاردا بۆ مانگێکی تەواو.",
+            priceUnlimitedNote: "چالاککردنی دەستبەجێ لەگەڵ پشتگیری سەرەتایی.",
+            priceUnlimitedCta: "ئێستا بەشداری بکە",
+            priceBusinessTitle: "بۆ کۆمپانیاکان",
+            priceBusinessPrice: "بەپێی داوا",
+            priceBusinessDesc: "چارەسەری گواستنەوە بۆ کۆمپانیاکان و کۆمەڵگا نیشتەجێیەکان.",
+            priceBusinessNote: "راپۆرتی مانگانە و داشبۆردی بەڕێوەبردن.",
+            priceBusinessCta: "پەیوەندیمان پێوە بکە",
+            priceBadge: "زۆرترین داواکراو",
+            businessTitle: "SUMER بۆ کاروبار",
+            businessDesc: "پەکێجی تایبەت بۆ کۆمپانیاکان، زانکۆکان، و کۆمەڵگا نیشتەجێیەکان بە کۆنترۆڵی تەواو و داتای ڕاستەوخۆ.",
+            businessLabel1: "داشبۆرد",
+            businessTitle1: "بەڕێوەبردنی راستەوخۆی فڵیت",
+            businessDesc1: "بەردەستبوون، ڕێژەی بەکارهێنان، و نیشانەکانی پارێزگاری بە کاتێکی تر ببینە.",
+            businessLabel2: "پەکێجی نەرم",
+            businessTitle2: "نرخدانێکی گونجاو بۆ تیمەکان",
+            businessDesc2: "داشکاندن بۆ بەشداری مانگانە و فاکتورێکی یەکگرتوو بۆ بەشەکان.",
+            businessLabel3: "دەستپێکردنی خێرا",
+            businessTitle3: "کارکردن لە ماوەی دوو هەفتە",
+            businessDesc3: "هەڵسەنگاندنی شوێن، دانانی شوێنەکانی وستاندن، و فێرکردنی تیمی کارگێڕی.",
+            faqTitle: "پرسیارە باوەکان",
+            faqDesc: "وەڵام و ئامۆژگارییە خێراکان بۆ گەشتی یەکەم.",
+            faqQ1: "ئایا پێویستم بە مۆڵەتنامەی شۆفێرییە؟",
+            faqA1: "نەخێر، تەنها پێویستە لە سەر 18 ساڵ بیت و ڕێگای هاتوچۆی ناوخۆیی پەیڕەو بکەیت.",
+            faqQ2: "لە کوێ دەتوانم وەستم؟",
+            faqA2: "ئەپەکە ناوچە پارێزراو و پەسەندکراوەکانی وستاندن پیشان دەدات بۆ دووربوون لە سزا.",
+            faqQ3: "خۆذە هەن؟",
+            faqA3: "بەڵێ، لە هەندێک شاردا هەن و دەتوانیت پێشوەخت لە ڕێگەی ئەپەکە داوا بکەیت.",
+            downloadTitle: "ئامادەی گەشتی داهاتووت؟",
+            downloadDesc: "ئەپی SUMER داگرە و لە گواستنەوەی زیرەک‌تر و بەردەوام‌تر سوود ببینە.",
+            appStoreLabel: "App Store",
+            playStoreLabel: "Google Play",
+            footerAbout: "پلاتفۆرمی گواستنەوەی شارستانی بە کارەبا کە خێرایی و پارێزگاری تێکەڵ دەکات.",
+            footerQuickLinks: "بەستەرە خێراکان",
+            footerLinkCities: "شارەکان",
+            footerLinkPricing: "نرخەکان",
+            footerLinkPartners: "هاوبەشکاری",
+            footerContact: "پەیوەندی",
+            footerFollow: "دوایمان بکەون",
+            footerSocialLabel: "بەستەرە کۆمەڵایەتییەکان",
+            footerSocialInstagram: "ئینستاگرام",
+            footerSocialLinkedIn: "لینکدئین",
+            footerSocialX: "X",
+            footerNote: "© 2026 SUMER. هەموو مافەکان پارێزراون."
+          }
+        };
+
+        const rtlLangs = new Set(["ar", "ku"]);
+        const langSwitch = document.querySelector(".lang-switch");
+        const langToggle = document.querySelector(".lang-toggle");
+        const buttons = document.querySelectorAll(".lang-btn");
+
+        const applyLanguage = (lang) => {
+          const dict = translations[lang] || translations.ar;
+          const dir = rtlLangs.has(lang) ? "rtl" : "ltr";
+
+          document.documentElement.lang = lang;
+          document.documentElement.dir = dir;
+          document.body.dir = dir;
+
+          document.querySelectorAll("[data-i18n]").forEach((el) => {
+            const key = el.dataset.i18n;
+            if (dict[key]) {
+              el.textContent = dict[key];
+            }
+          });
+
+          document.querySelectorAll("[data-i18n-attr]").forEach((el) => {
+            const mappings = el.dataset.i18nAttr.split(";");
+            mappings.forEach((mapping) => {
+              const parts = mapping.split(":");
+              const attr = parts[0];
+              const key = parts[1];
+              if (dict[key]) {
+                el.setAttribute(attr, dict[key]);
+              }
+            });
+          });
+
+          buttons.forEach((btn) => {
+            const isActive = btn.dataset.lang === lang;
+            btn.classList.toggle("active", isActive);
+            btn.setAttribute("aria-selected", isActive ? "true" : "false");
+          });
+
+          try {
+            localStorage.setItem("sumer_lang", lang);
+          } catch (err) {
+          }
+        };
+
+        const closeLangMenu = () => {
+          if (!langSwitch || !langToggle) {
+            return;
+          }
+          langSwitch.classList.remove("open");
+          langToggle.setAttribute("aria-expanded", "false");
+        };
+
+        const toggleLangMenu = () => {
+          if (!langSwitch || !langToggle) {
+            return;
+          }
+          const isOpen = langSwitch.classList.toggle("open");
+          langToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+        };
+
+        if (langToggle) {
+          langToggle.addEventListener("click", (event) => {
+            event.stopPropagation();
+            toggleLangMenu();
+          });
+        }
+
+        document.addEventListener("click", (event) => {
+          if (langSwitch && !langSwitch.contains(event.target)) {
+            closeLangMenu();
+          }
+        });
+
+        document.addEventListener("keydown", (event) => {
+          if (event.key === "Escape") {
+            closeLangMenu();
+          }
+        });
+
+        buttons.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            applyLanguage(btn.dataset.lang);
+            closeLangMenu();
+          });
+        });
+
+        let initialLang = "ar";
+        try {
+          const stored = localStorage.getItem("sumer_lang");
+          if (stored && translations[stored]) {
+            initialLang = stored;
+          } else {
+            const browserLang = (navigator.language || "").toLowerCase();
+            if (browserLang.startsWith("en")) {
+              initialLang = "en";
+            } else if (browserLang.startsWith("ku") || browserLang.startsWith("ckb")) {
+              initialLang = "ku";
+            }
+          }
+        } catch (err) {
+        }
+
+        applyLanguage(initialLang);
+      })();
+    </script>
+  </body>
+</html>
+
+
+
+

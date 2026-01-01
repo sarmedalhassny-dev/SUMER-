@@ -1,0 +1,1228 @@
+﻿<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title data-i18n="metaTitle">SUMER | المدن</title>
+    <meta name="description" data-i18n-attr="content:metaDescription" content="حدد مناطق التغطية الخاصة بـ SUMER على خريطة بغداد باستخدام GPS أو الرسم اليدوي." />
+    <meta name="theme-color" content="#b7ff4b" />
+    <meta property="og:title" data-i18n-attr="content:metaTitle" content="SUMER | المدن" />
+    <meta property="og:description" data-i18n-attr="content:metaDescription" content="حدد مناطق التغطية الخاصة بـ SUMER على خريطة بغداد باستخدام GPS أو الرسم اليدوي." />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" data-i18n-attr="content:metaLocale" content="ar_AR" />
+    <meta property="og:site_name" content="SUMER" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="apple-touch-icon" href="favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.css" />
+    <style>
+      :root {
+        --bg: #f4f1ea;
+        --ink: #11110f;
+        --muted: #6b6a66;
+        --lime: #b7ff4b;
+        --leaf: #1a5b2e;
+        --sky: #d8f2ff;
+        --sand: #f7e5c9;
+        --card: #ffffff;
+        --alert: #c0292c;
+        --shadow: 0 30px 80px rgba(17, 17, 15, 0.14);
+        --shadow-soft: 0 16px 40px rgba(17, 17, 15, 0.12);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        font-family: "IBM Plex Sans Arabic", "Space Grotesk", sans-serif;
+        color: var(--ink);
+        background: radial-gradient(circle at 10% 20%, #fef7e8 0%, transparent 40%),
+          radial-gradient(circle at 90% 10%, #e1ffe2 0%, transparent 38%), var(--bg);
+        text-align: start;
+        position: relative;
+        overflow-x: hidden;
+      }
+
+      body::before,
+      body::after {
+        content: "";
+        position: fixed;
+        width: 420px;
+        height: 420px;
+        border-radius: 50%;
+        opacity: 0.55;
+        pointer-events: none;
+        z-index: -1;
+        animation: float-shape 18s ease-in-out infinite;
+      }
+
+      body::before {
+        top: -140px;
+        left: -140px;
+        background: radial-gradient(circle, rgba(183, 255, 75, 0.45), rgba(183, 255, 75, 0) 70%);
+      }
+
+      body::after {
+        bottom: -180px;
+        right: -180px;
+        width: 520px;
+        height: 520px;
+        background: radial-gradient(circle, rgba(156, 231, 255, 0.45), rgba(156, 231, 255, 0) 70%);
+        animation-delay: -6s;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+
+      .skip-link {
+        position: absolute;
+        top: -40px;
+        right: 24px;
+        background: var(--ink);
+        color: #fff;
+        padding: 8px 16px;
+        border-radius: 999px;
+        z-index: 100;
+        transition: top 0.2s ease;
+      }
+
+      .skip-link:focus {
+        top: 18px;
+      }
+
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background: rgba(244, 241, 234, 0.85);
+        backdrop-filter: blur(14px);
+        border-bottom: 1px solid rgba(17, 17, 15, 0.08);
+      }
+
+      .nav {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 18px 32px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        font-family: "Space Grotesk", "IBM Plex Sans Arabic", sans-serif;
+      }
+
+      .brand-mark {
+        width: 42px;
+        height: 42px;
+        border-radius: 16px;
+        background: #ffffff;
+        border: 1px solid rgba(17, 17, 15, 0.1);
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+      }
+
+      .brand-mark img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 20px;
+        color: var(--muted);
+        font-size: 0.95rem;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .nav-links a {
+        position: relative;
+        padding-bottom: 4px;
+      }
+
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        height: 2px;
+        background: var(--ink);
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: transform 0.2s ease;
+        opacity: 0.35;
+      }
+
+      html[dir="ltr"] .nav-links a::after {
+        transform-origin: left;
+      }
+
+      .nav-links a:hover::after {
+        transform: scaleX(1);
+        transform-origin: left;
+      }
+
+      html[dir="ltr"] .nav-links a:hover::after {
+        transform-origin: right;
+      }
+
+      .nav-links a.active {
+        color: var(--ink);
+        font-weight: 600;
+      }
+
+      .nav-links a.active::after {
+        transform: scaleX(1);
+        opacity: 0.6;
+      }
+
+      .nav-cta {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .lang-switch {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .lang-toggle {
+        width: 42px;
+        height: 42px;
+        border-radius: 999px;
+        border: 1px solid rgba(17, 17, 15, 0.15);
+        background: #fff;
+        display: grid;
+        place-items: center;
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .lang-toggle:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 10px 24px rgba(17, 17, 15, 0.12);
+      }
+
+      .lang-toggle:focus-visible {
+        outline: 3px solid rgba(17, 17, 15, 0.4);
+        outline-offset: 3px;
+      }
+
+      .lang-icon {
+        width: 20px;
+        height: 20px;
+        display: block;
+      }
+
+      .lang-menu {
+        position: absolute;
+        top: calc(100% + 10px);
+        left: 50%;
+        transform: translate(-50%, -6px);
+        min-width: 170px;
+        background: #fff;
+        border: 1px solid rgba(17, 17, 15, 0.12);
+        border-radius: 16px;
+        padding: 6px;
+        display: grid;
+        gap: 4px;
+        box-shadow: var(--shadow-soft);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition: opacity 0.2s ease, transform 0.2s ease;
+        z-index: 20;
+      }
+
+      .lang-switch.open .lang-menu {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translate(-50%, 0);
+      }
+
+      .lang-btn {
+        border: none;
+        background: transparent;
+        padding: 8px 12px;
+        border-radius: 12px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        cursor: pointer;
+        font-family: "Space Grotesk", "IBM Plex Sans Arabic", sans-serif;
+        transition: background 0.2s ease, color 0.2s ease;
+        text-align: start;
+      }
+
+      .lang-btn.active {
+        background: var(--ink);
+        color: #fff;
+      }
+
+      .btn {
+        border: none;
+        border-radius: 999px;
+        padding: 12px 22px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        white-space: nowrap;
+        font-weight: 600;
+        font-family: "Space Grotesk", "IBM Plex Sans Arabic", sans-serif;
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease;
+      }
+
+      .btn.primary {
+        background: var(--ink);
+        color: #fff;
+        box-shadow: 0 18px 40px rgba(17, 17, 15, 0.2);
+      }
+
+      .btn.primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 22px 44px rgba(17, 17, 15, 0.26);
+      }
+
+      .btn.ghost {
+        background: transparent;
+        border: 1px solid rgba(17, 17, 15, 0.2);
+      }
+
+      .btn.ghost:hover {
+        background: rgba(17, 17, 15, 0.06);
+      }
+
+      .btn[disabled] {
+        opacity: 0.5;
+        cursor: not-allowed;
+        box-shadow: none;
+        transform: none;
+      }
+
+      .hero {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 88px 32px 32px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 32px;
+        align-items: center;
+      }
+
+      .eyebrow {
+        font-size: 0.9rem;
+        letter-spacing: 1px;
+        color: var(--leaf);
+        font-weight: 600;
+        margin: 0 0 12px;
+      }
+
+      .hero h1 {
+        font-family: "Space Grotesk", "IBM Plex Sans Arabic", sans-serif;
+        font-size: clamp(2.3rem, 4vw, 3.4rem);
+        line-height: 1.1;
+        margin: 0 0 20px;
+      }
+
+      .hero p {
+        color: var(--muted);
+        font-size: 1.05rem;
+        line-height: 1.7;
+        margin: 0 0 24px;
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        align-items: center;
+      }
+
+      .chip-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 16px;
+      }
+
+      .chip {
+        padding: 6px 14px;
+        border-radius: 999px;
+        border: 1px solid rgba(17, 17, 15, 0.12);
+        background: #fff;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--leaf);
+      }
+
+      .hero-card {
+        background: var(--card);
+        padding: 24px;
+        border-radius: 28px;
+        box-shadow: var(--shadow-soft);
+        display: grid;
+        gap: 16px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .hero-card h3 {
+        margin: 0;
+        font-size: 1.1rem;
+      }
+
+      .hero-card p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      .hero-card .stat {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 0;
+        border-bottom: 1px solid rgba(17, 17, 15, 0.08);
+      }
+
+      .hero-card .stat:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+      }
+
+      .hero-card strong {
+        font-size: 1.4rem;
+      }
+
+      .map-section {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 24px 32px 80px;
+        display: grid;
+        grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+        gap: 24px;
+        align-items: start;
+      }
+
+      .map-shell {
+        background: var(--card);
+        border-radius: 28px;
+        padding: 20px;
+        box-shadow: var(--shadow);
+        display: grid;
+        gap: 16px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .map-header {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+      }
+
+      .map-header h2 {
+        margin: 0 0 8px;
+        font-size: 1.5rem;
+      }
+
+      .map-header p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.98rem;
+      }
+
+      .map-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .map-canvas {
+        width: 100%;
+        min-height: 360px;
+        height: 540px;
+        border-radius: 22px;
+        overflow: hidden;
+        border: 1px solid rgba(17, 17, 15, 0.1);
+        background: var(--sky);
+      }
+
+      .map-footer {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .map-selection {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 12px;
+        color: var(--muted);
+      }
+
+      .map-selection .pill {
+        padding: 6px 12px;
+        border-radius: 999px;
+        background: var(--lime);
+        color: var(--ink);
+        font-weight: 700;
+        min-width: 42px;
+        text-align: center;
+      }
+
+      .map-selection .note {
+        font-size: 0.9rem;
+      }
+
+      .status {
+        font-size: 0.9rem;
+        min-height: 1.1rem;
+        color: var(--alert);
+      }
+
+      .status.visible {
+        font-weight: 600;
+      }
+
+      .map-panel {
+        background: var(--card);
+        border-radius: 28px;
+        padding: 24px;
+        box-shadow: var(--shadow-soft);
+        display: grid;
+        gap: 16px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .map-panel h3 {
+        margin: 0;
+        font-size: 1.3rem;
+      }
+
+      .map-panel p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      .instruction-list {
+        display: grid;
+        gap: 12px;
+      }
+
+      .instruction-card {
+        background: #fefaf1;
+        border-radius: 18px;
+        padding: 16px;
+        border: 1px solid rgba(17, 17, 15, 0.08);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .hero-card:hover,
+      .map-shell:hover,
+      .map-panel:hover,
+      .instruction-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 24px 60px rgba(17, 17, 15, 0.18);
+      }
+
+      @keyframes float-shape {
+        0%,
+        100% {
+          transform: translate(0, 0);
+        }
+        50% {
+          transform: translate(20px, -30px);
+        }
+      }
+
+      .instruction-card h4 {
+        margin: 0 0 6px;
+        font-size: 1rem;
+      }
+
+      .instruction-card p {
+        margin: 0;
+        font-size: 0.95rem;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      footer {
+        padding: 24px 32px 40px;
+        text-align: center;
+        color: var(--muted);
+      }
+
+      .leaflet-bar,
+      .leaflet-control-layers {
+        border: none;
+        box-shadow: 0 10px 24px rgba(17, 17, 15, 0.15);
+        border-radius: 16px;
+        overflow: hidden;
+      }
+
+      .leaflet-bar a {
+        background: #fff;
+        color: var(--ink);
+        border-bottom: 1px solid rgba(17, 17, 15, 0.1);
+      }
+
+      .leaflet-bar a:last-child {
+        border-bottom: none;
+      }
+
+      .leaflet-control-attribution {
+        font-size: 0.7rem;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+
+        body::before,
+        body::after {
+          animation: none;
+        }
+      }
+
+      @media (max-width: 1024px) {
+        .nav {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .nav-links,
+        .nav-cta {
+          width: 100%;
+        }
+
+        .map-section {
+          grid-template-columns: 1fr;
+          padding: 20px 24px 72px;
+        }
+
+        .map-canvas {
+          height: 420px;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .nav {
+          padding: 16px 20px;
+        }
+
+        .nav-cta {
+          flex-direction: column;
+          width: 100%;
+          align-items: stretch;
+        }
+
+        .nav-cta .btn {
+          width: 100%;
+          justify-content: center;
+        }
+
+        .lang-switch {
+          width: 100%;
+          justify-content: center;
+        }
+
+        .hero {
+          padding: 64px 20px 24px;
+        }
+
+        .map-section {
+          padding: 16px 20px 60px;
+        }
+
+        .map-header {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .map-actions {
+          width: 100%;
+        }
+
+        .map-actions .btn {
+          width: 100%;
+          justify-content: center;
+        }
+
+        .map-canvas {
+          height: 360px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip-link" href="#content" data-i18n="skipLink">تجاوز إلى المحتوى</a>
+    <header>
+      <nav class="nav" aria-label="التنقل الرئيسي" data-i18n-attr="aria-label:navLabel">
+        <a class="brand" href="index.html">
+          <span class="brand-mark">
+            <img src="favicon.png" alt="شعار SUMER" data-i18n-attr="alt:logoAlt" />
+          </span>
+          <span>SUMER</span>
+        </a>
+        <div class="nav-links">
+          <a href="index.html" data-i18n="navHome">الرئيسية</a>
+          <a href="about.html" data-i18n="navAbout">من نحن</a>
+          <a href="cities.html" class="active" data-i18n="navMap">المدن</a>
+          <a href="subscribe.html" data-i18n="navSubscribe">الاشتراك</a>
+        </div>
+        <div class="nav-cta">
+          <div class="lang-switch">
+  <button class="lang-toggle" type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="تغيير اللغة" data-i18n-attr="aria-label:langLabel">
+    <svg class="lang-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6" />
+      <path d="M3 12h18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+      <path d="M12 3c3.2 3.6 3.2 14.4 0 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+      <path d="M12 3c-3.2 3.6-3.2 14.4 0 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+    </svg>
+  </button>
+  <div class="lang-menu" role="listbox" aria-label="تغيير اللغة" data-i18n-attr="aria-label:langLabel">
+    <button class="lang-btn active" type="button" data-lang="ar" role="option" aria-selected="true">العربية</button>
+    <button class="lang-btn" type="button" data-lang="en" role="option" aria-selected="false">English</button>
+    <button class="lang-btn" type="button" data-lang="ku" role="option" aria-selected="false">کوردی</button>
+  </div>
+</div>
+          <a class="btn primary" href="index.html#download" data-i18n="ctaApp">تحميل التطبيق</a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="content">
+      <section class="hero">
+        <div>
+          <p class="eyebrow" data-i18n="heroEyebrow">مدننا</p>
+          <h1 data-i18n="heroTitle">حدد مناطق التغطية في بغداد بدقة.</h1>
+          <p data-i18n="heroDesc">استخدم الخريطة الحية لاختيار الأحياء التي نخدمها وارسم الحدود باللون الأخضر.</p>
+          <div class="hero-actions">
+            <a class="btn primary" href="#map" data-i18n="mapTitle">خريطة التغطية</a>
+            <a class="btn ghost" href="index.html" data-i18n="navHome">الرئيسية</a>
+          </div>
+          <div class="chip-row">
+            <span class="chip" data-i18n="chip1">GPS مباشر</span>
+            <span class="chip" data-i18n="chip2">رسم يدوي للمناطق</span>
+            <span class="chip" data-i18n="chip3">حفظ تلقائي</span>
+          </div>
+        </div>
+        <div class="hero-card">
+          <h3 data-i18n="heroCardTitle">لمحة سريعة</h3>
+          <p data-i18n="heroCardDesc">إدارة مناطق الخدمة بشكل مرن مع تحديثات فورية.</p>
+          <div class="stat">
+            <span data-i18n="heroStat1Label">مناطق مستهدفة</span>
+            <strong>8</strong>
+          </div>
+          <div class="stat">
+            <span data-i18n="heroStat2Label">أدوات رسم</span>
+            <strong>2</strong>
+          </div>
+          <div class="stat">
+            <span data-i18n="heroStat3Label">حفظ محلي</span>
+            <strong>100%</strong>
+          </div>
+        </div>
+      </section>
+
+      <section class="map-section">
+        <div class="map-shell">
+          <div class="map-header">
+            <div>
+              <h2 data-i18n="mapTitle">خريطة التغطية</h2>
+              <p data-i18n="mapNote">الخريطة تعتمد على OpenStreetMap وتحتاج اتصالاً بالإنترنت لعرض البلاطات.</p>
+            </div>
+            <div class="map-actions">
+              <button class="btn primary" id="locateMe" type="button" data-i18n="locateMe">موقعي الحالي</button>
+              <button class="btn ghost" id="clearDrawings" type="button" data-i18n="clearDrawings">مسح المناطق</button>
+            </div>
+          </div>
+          <div id="map" class="map-canvas" role="region" aria-label="خريطة بغداد التفاعلية" data-i18n-attr="aria-label:mapAlt"></div>
+          <div class="map-footer">
+            <div class="map-selection">
+              <span class="label" data-i18n="selectedLabel">المناطق المحددة</span>
+              <span class="pill" id="selectedCount">0</span>
+              <span class="note" id="selectedNote" data-i18n="selectedEmpty">لا توجد مناطق محددة بعد.</span>
+            </div>
+            <div class="status" id="mapStatus" role="status" aria-live="polite"></div>
+          </div>
+        </div>
+        <aside class="map-panel">
+          <h3 data-i18n="instructionsTitle">كيف تحدد مناطق الخدمة؟</h3>
+          <p data-i18n="instructionsDesc">اختر الأدوات من لوحة الرسم أعلى الخريطة، ثم احفظ المناطق تلقائياً.</p>
+          <div class="instruction-list">
+            <div class="instruction-card">
+              <h4 data-i18n="instruction1Title">ارسم الحدود</h4>
+              <p data-i18n="instruction1Desc">استخدم أداة المستطيل أو المضلع لتحديد كل منطقة خدمة.</p>
+            </div>
+            <div class="instruction-card">
+              <h4 data-i18n="instruction2Title">عدّل بسهولة</h4>
+              <p data-i18n="instruction2Desc">يمكنك تعديل أو حذف أي منطقة عبر أداة التحرير.</p>
+            </div>
+            <div class="instruction-card">
+              <h4 data-i18n="instruction3Title">احفظ تلقائياً</h4>
+              <p data-i18n="instruction3Desc">المناطق تحفظ في المتصفح تلقائياً لتعود إليها لاحقاً.</p>
+            </div>
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <footer>
+      <small data-i18n="footerNote">© 2026 SUMER. جميع الحقوق محفوظة.</small>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.js"></script>
+    <script>
+      (function () {
+        const translations = {
+          ar: {
+            metaTitle: "SUMER | المدن",
+            metaDescription: "حدد مناطق التغطية الخاصة بـ SUMER على خريطة بغداد باستخدام GPS أو الرسم اليدوي.",
+            metaLocale: "ar_AR",
+            skipLink: "تجاوز إلى المحتوى",
+            navLabel: "التنقل الرئيسي",
+            navHome: "الرئيسية",
+            navAbout: "من نحن",
+            navMap: "المدن",
+            navSubscribe: "الاشتراك",
+            langLabel: "تغيير اللغة",
+            logoAlt: "شعار SUMER",
+            ctaApp: "تحميل التطبيق",
+            heroEyebrow: "مدننا",
+            heroTitle: "حدد مناطق التغطية في بغداد بدقة.",
+            heroDesc: "استخدم الخريطة الحية لاختيار الأحياء التي نخدمها وارسم الحدود باللون الأخضر.",
+            chip1: "GPS مباشر",
+            chip2: "رسم يدوي للمناطق",
+            chip3: "حفظ تلقائي",
+            heroCardTitle: "لمحة سريعة",
+            heroCardDesc: "إدارة مناطق الخدمة بشكل مرن مع تحديثات فورية.",
+            heroStat1Label: "مناطق مستهدفة",
+            heroStat2Label: "أدوات رسم",
+            heroStat3Label: "حفظ محلي",
+            mapTitle: "خريطة التغطية",
+            mapNote: "الخريطة تعتمد على OpenStreetMap وتحتاج اتصالاً بالإنترنت لعرض البلاطات.",
+            locateMe: "موقعي الحالي",
+            clearDrawings: "مسح المناطق",
+            selectedLabel: "المناطق المحددة",
+            selectedEmpty: "لا توجد مناطق محددة بعد.",
+            selectedFilled: "تم تحديد {count} منطقة.",
+            mapAlt: "خريطة بغداد التفاعلية",
+            locationError: "تعذر الحصول على موقعك. تأكد من تفعيل الـ GPS.",
+            instructionsTitle: "كيف تحدد مناطق الخدمة؟",
+            instructionsDesc: "اختر الأدوات من لوحة الرسم أعلى الخريطة، ثم احفظ المناطق تلقائياً.",
+            instruction1Title: "ارسم الحدود",
+            instruction1Desc: "استخدم أداة المستطيل أو المضلع لتحديد كل منطقة خدمة.",
+            instruction2Title: "عدّل بسهولة",
+            instruction2Desc: "يمكنك تعديل أو حذف أي منطقة عبر أداة التحرير.",
+            instruction3Title: "احفظ تلقائياً",
+            instruction3Desc: "المناطق تحفظ في المتصفح تلقائياً لتعود إليها لاحقاً.",
+            footerNote: "© 2026 SUMER. جميع الحقوق محفوظة."
+          },
+          en: {
+            metaTitle: "SUMER | Cities",
+            metaDescription: "Mark SUMER coverage areas in Baghdad using live GPS and manual drawing.",
+            metaLocale: "en_US",
+            skipLink: "Skip to content",
+            navLabel: "Primary navigation",
+            navHome: "Home",
+            navAbout: "About us",
+            navMap: "Cities",
+            navSubscribe: "Subscribe",
+            langLabel: "Language switcher",
+            logoAlt: "SUMER logo",
+            ctaApp: "Get the app",
+            heroEyebrow: "Cities",
+            heroTitle: "Map Baghdad coverage with precision.",
+            heroDesc: "Use the live map to mark neighborhoods we serve and draw the boundaries in green.",
+            chip1: "Live GPS",
+            chip2: "Manual drawing",
+            chip3: "Auto save",
+            heroCardTitle: "Quick snapshot",
+            heroCardDesc: "Manage service zones with flexible, real-time updates.",
+            heroStat1Label: "Target zones",
+            heroStat2Label: "Draw tools",
+            heroStat3Label: "Local save",
+            mapTitle: "Coverage map",
+            mapNote: "Map tiles are powered by OpenStreetMap and require an internet connection.",
+            locateMe: "My location",
+            clearDrawings: "Clear zones",
+            selectedLabel: "Selected zones",
+            selectedEmpty: "No zones selected yet.",
+            selectedFilled: "{count} zone(s) selected.",
+            mapAlt: "Interactive Baghdad map",
+            locationError: "We couldn't access your location. Enable GPS and try again.",
+            instructionsTitle: "How to mark service areas",
+            instructionsDesc: "Use the drawing tools on the map, then edit and save zones at any time.",
+            instruction1Title: "Draw boundaries",
+            instruction1Desc: "Use the rectangle or polygon tool to outline a service area.",
+            instruction2Title: "Edit quickly",
+            instruction2Desc: "Adjust or delete any zone using the edit tool.",
+            instruction3Title: "Auto saved",
+            instruction3Desc: "Zones are saved locally in your browser for next time.",
+            footerNote: "© 2026 SUMER. All rights reserved."
+          },
+          ku: {
+            metaTitle: "SUMER | شارەکان",
+            metaDescription: "ناوچەکانی خزمەتگوزاری SUMER لە بەغداد دیاری بکە بە بەکارهێنانی GPS و دەسکاری دەستی.",
+            metaLocale: "ku_IQ",
+            skipLink: "بازدان بۆ ناوەڕۆک",
+            navLabel: "گەڕانەوەی سەرەکی",
+            navHome: "سەرەکی",
+            navAbout: "دەربارەی ئێمە",
+            navMap: "شارەکان",
+            navSubscribe: "بەشداربوون",
+            langLabel: "گۆڕینی زمان",
+            logoAlt: "لوگۆی SUMER",
+            ctaApp: "داگرتنی ئەپ",
+            heroEyebrow: "شارەکان",
+            heroTitle: "پوششی بەغداد بە وردی دیاری بکە.",
+            heroDesc: "نەخشەی زیندوو بەکاربهێنە بۆ دیاریکردنی ناوچەکان و سنوورەکان بە شینی سەوز بکێشە.",
+            chip1: "GPS زیندوو",
+            chip2: "ڕەسمی دەستی",
+            chip3: "پاشەکەوتی خۆکار",
+            heroCardTitle: "کورتەی خێرا",
+            heroCardDesc: "بەڕێوەبردنی ناوچەکانی خزمەتگوزاری بە هەموارکردنی خێرا.",
+            heroStat1Label: "ناوچەی ئامانج",
+            heroStat2Label: "ئامرازی ڕەسم",
+            heroStat3Label: "پاشەکەوتی ناوخۆ",
+            mapTitle: "نەخشەی پوشش",
+            mapNote: "پلاطەکانی نەخشە لەسەر بنەمای OpenStreetMap ـەن و پێویستیان بە ئینتەرنێتە.",
+            locateMe: "شوێنی من",
+            clearDrawings: "سڕینەوەی ناوچەکان",
+            selectedLabel: "ناوچە هەڵبژاردراوەکان",
+            selectedEmpty: "هیچ ناوچەیەک هەڵنەبژێردراوە.",
+            selectedFilled: "{count} ناوچە هەڵبژێردرا.",
+            mapAlt: "نەخشەی بەغداد بە شێوەی کارا",
+            locationError: "ناتوانین شوێنی تۆ بدۆزینەوە. GPS چالاک بکە.",
+            instructionsTitle: "چۆن ناوچەی خزمەتگوزاری دیاری بکەین؟",
+            instructionsDesc: "ئامرازەکانی ڕەسم لەسەر نەخشە بەکاربهێنە و دواتر ناوچەکان دەستکاری بکە.",
+            instruction1Title: "سنوور بکێشە",
+            instruction1Desc: "ئامرازی مستطیل یان پلۆگۆن بەکاربهێنە بۆ دیاریکردنی ناوچە.",
+            instruction2Title: "دەستکاری خێرا",
+            instruction2Desc: "هەر ناوچەیەک دەستکاری یان بسڕەوە بە ئامرازی دەستکاری.",
+            instruction3Title: "پاشەکەوتی خۆکار",
+            instruction3Desc: "ناوچەکان بە شێوەی خۆکار لە مێژووی وێبگەڕەکەت هەڵدەگیرێن.",
+            footerNote: "© 2026 SUMER. هەموو مافەکان پارێزراون."
+          }
+        };
+
+        const rtlLangs = new Set(["ar", "ku"]);
+        const langSwitch = document.querySelector(".lang-switch");
+        const langToggle = document.querySelector(".lang-toggle");
+        const buttons = document.querySelectorAll(".lang-btn");
+        const selectedCount = document.getElementById("selectedCount");
+        const selectedNote = document.getElementById("selectedNote");
+        const statusEl = document.getElementById("mapStatus");
+        const clearBtn = document.getElementById("clearDrawings");
+        const locateBtn = document.getElementById("locateMe");
+        let currentLang = "ar";
+        let statusKey = "";
+        let map;
+        let drawnItems;
+        let locationMarker;
+
+        const t = (key) => {
+          const dict = translations[currentLang] || translations.ar;
+          return dict[key] || "";
+        };
+
+        const updateSelectionText = () => {
+          if (!drawnItems) {
+            return;
+          }
+          const count = drawnItems.getLayers().length;
+          if (selectedCount) {
+            selectedCount.textContent = count;
+          }
+          if (selectedNote) {
+            if (count === 0) {
+              selectedNote.textContent = t("selectedEmpty");
+            } else {
+              selectedNote.textContent = t("selectedFilled").replace("{count}", count);
+            }
+          }
+          if (clearBtn) {
+            clearBtn.disabled = count === 0;
+          }
+        };
+
+        const updateStatus = () => {
+          if (!statusEl) {
+            return;
+          }
+          statusEl.textContent = statusKey ? t(statusKey) : "";
+          statusEl.classList.toggle("visible", Boolean(statusKey));
+        };
+
+        const applyLanguage = (lang) => {
+          currentLang = translations[lang] ? lang : "ar";
+          const dict = translations[currentLang];
+          const dir = rtlLangs.has(currentLang) ? "rtl" : "ltr";
+
+          document.documentElement.lang = currentLang;
+          document.documentElement.dir = dir;
+          document.body.dir = dir;
+
+          document.querySelectorAll("[data-i18n]").forEach((el) => {
+            const key = el.dataset.i18n;
+            if (dict[key]) {
+              el.textContent = dict[key];
+            }
+          });
+
+          document.querySelectorAll("[data-i18n-attr]").forEach((el) => {
+            const mappings = el.dataset.i18nAttr.split(";");
+            mappings.forEach((mapping) => {
+              const parts = mapping.split(":");
+              const attr = parts[0];
+              const key = parts[1];
+              if (dict[key]) {
+                el.setAttribute(attr, dict[key]);
+              }
+            });
+          });
+
+          buttons.forEach((btn) => {
+            const isActive = btn.dataset.lang === currentLang;
+            btn.classList.toggle("active", isActive);
+            btn.setAttribute("aria-selected", isActive ? "true" : "false");
+          });
+
+          try {
+            localStorage.setItem("sumer_lang", currentLang);
+          } catch (err) {
+          }
+
+          updateSelectionText();
+          updateStatus();
+        };
+
+        const closeLangMenu = () => {
+          if (!langSwitch || !langToggle) {
+            return;
+          }
+          langSwitch.classList.remove("open");
+          langToggle.setAttribute("aria-expanded", "false");
+        };
+
+        const toggleLangMenu = () => {
+          if (!langSwitch || !langToggle) {
+            return;
+          }
+          const isOpen = langSwitch.classList.toggle("open");
+          langToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+        };
+
+        if (langToggle) {
+          langToggle.addEventListener("click", (event) => {
+            event.stopPropagation();
+            toggleLangMenu();
+          });
+        }
+
+        document.addEventListener("click", (event) => {
+          if (langSwitch && !langSwitch.contains(event.target)) {
+            closeLangMenu();
+          }
+        });
+
+        document.addEventListener("keydown", (event) => {
+          if (event.key === "Escape") {
+            closeLangMenu();
+          }
+        });
+
+        buttons.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            applyLanguage(btn.dataset.lang);
+            closeLangMenu();
+          });
+        });
+
+        map = L.map("map", { zoomControl: false }).setView([33.3152, 44.3661], 12);
+
+        L.control.zoom({ position: "bottomright" }).addTo(map);
+
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          maxZoom: 19,
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+
+        drawnItems = new L.FeatureGroup();
+        map.addLayer(drawnItems);
+
+        const zoneStyle = {
+          color: "#1a5b2e",
+          weight: 2,
+          fillColor: "#b7ff4b",
+          fillOpacity: 0.35
+        };
+
+        const drawControl = new L.Control.Draw({
+          position: "topright",
+          draw: {
+            polygon: {
+              allowIntersection: false,
+              showArea: true
+            },
+            rectangle: true,
+            polyline: false,
+            circle: false,
+            circlemarker: false,
+            marker: false
+          },
+          edit: {
+            featureGroup: drawnItems
+          }
+        });
+        map.addControl(drawControl);
+
+        const storageKey = "sumer_baghdad_zones_v1";
+
+        const saveZones = () => {
+          const data = drawnItems.toGeoJSON();
+          try {
+            localStorage.setItem(storageKey, JSON.stringify(data));
+          } catch (err) {
+          }
+        };
+
+        const loadZones = () => {
+          try {
+            const raw = localStorage.getItem(storageKey);
+            if (!raw) {
+              return;
+            }
+            const data = JSON.parse(raw);
+            if (!data || !data.features) {
+              return;
+            }
+            L.geoJSON(data, { style: zoneStyle }).eachLayer((layer) => {
+              drawnItems.addLayer(layer);
+            });
+          } catch (err) {
+          }
+        };
+
+        map.on(L.Draw.Event.CREATED, (event) => {
+          const layer = event.layer;
+          if (layer.setStyle) {
+            layer.setStyle(zoneStyle);
+          }
+          drawnItems.addLayer(layer);
+          saveZones();
+          updateSelectionText();
+        });
+
+        map.on(L.Draw.Event.EDITED, () => {
+          saveZones();
+          updateSelectionText();
+        });
+
+        map.on(L.Draw.Event.DELETED, () => {
+          saveZones();
+          updateSelectionText();
+        });
+
+        if (clearBtn) {
+          clearBtn.addEventListener("click", () => {
+            drawnItems.clearLayers();
+            saveZones();
+            updateSelectionText();
+            statusKey = "";
+            updateStatus();
+          });
+        }
+
+        if (locateBtn) {
+          locateBtn.addEventListener("click", () => {
+            statusKey = "";
+            updateStatus();
+            map.locate({ setView: true, maxZoom: 16 });
+          });
+        }
+
+        map.on("locationfound", (event) => {
+          if (locationMarker) {
+            locationMarker.setLatLng(event.latlng);
+          } else {
+            locationMarker = L.circleMarker(event.latlng, {
+              radius: 8,
+              color: "#1a5b2e",
+              fillColor: "#b7ff4b",
+              fillOpacity: 0.7
+            }).addTo(map);
+          }
+        });
+
+        map.on("locationerror", () => {
+          statusKey = "locationError";
+          updateStatus();
+        });
+
+        loadZones();
+        updateSelectionText();
+
+        let initialLang = "ar";
+        try {
+          const stored = localStorage.getItem("sumer_lang");
+          if (stored && translations[stored]) {
+            initialLang = stored;
+          } else {
+            const browserLang = (navigator.language || "").toLowerCase();
+            if (browserLang.startsWith("en")) {
+              initialLang = "en";
+            } else if (browserLang.startsWith("ku") || browserLang.startsWith("ckb")) {
+              initialLang = "ku";
+            }
+          }
+        } catch (err) {
+        }
+
+        applyLanguage(initialLang);
+      })();
+    </script>
+  </body>
+</html>
+
